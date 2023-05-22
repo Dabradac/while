@@ -1,15 +1,23 @@
 import time
+
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 
 browser = webdriver.Chrome()
 browser.implicitly_wait(10)
 
-
-
-browser.get('https://www.google.com/webhp?hl=ru&sa=X&ved=0ahUKEwjK5pjd8vz-AhVgQvEDHeTrBFoQPAgI')
-browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/textarea').send_keys('autotest')
-browser.find_element(By.XPATH, '/html/body/div[1]/div[3]/form/div[1]/div[1]/div[2]/div[2]/div[7]/center/input[1]').click()
-element = browser.find_element(By.XPATH, '/html/body/div[6]/div/div[11]/div[1]/div[2]/div[2]/div/div/div[2]/div/div/div[2]/g-section-with-header/div[1]/title-with-lhs-icon/a/div[3]/h3').text
-assert element == 'Картинки по запросу autotest'
+browser.get('https://testpages.herokuapp.com/styled/drag-drop-javascript.html') # инициализация браузера
+element = browser.find_element(By.CSS_SELECTOR, '#draggable2').send_keys('') # отправка клавиш на элемент
+browser.find_element(By.CSS_SELECTOR, '#draggable2').click() # клик по элементу
+browser.find_element(By.CSS_SELECTOR, '#draggable2').text   # поиск текста в элементе
+browser.find_element(By.CSS_SELECTOR, ' ') # поиск элемента
+drop = browser.find_element(By.CSS_SELECTOR, '#droppable1') # задаем переменной значение элемента
+action = ActionChains(browser)  # инициализация цепочки действий
+action.click_and_hold(element) # клик и удержание
+action.move_to_element(drop) # перемещение на элемент
+action.drag_and_drop(element,drop) # drag and drop
+action.context_click() # клик правой кнопкой мыши
+action.release()# отпустить кнопку мыши
+action.perform() # подтверждение
 
