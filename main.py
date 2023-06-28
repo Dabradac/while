@@ -16,7 +16,7 @@ drop = browser.find_element(By.CSS_SELECTOR, '#droppable1') # задаем пе�
 action = ActionChains(browser)  # инициализация цепочки действий
 action.click_and_hold(element) # клик и удержание
 action.move_to_element(drop) # перемещение на элемент
-action.drag_and_drop(element,drop) # drag and drop
+action.drag_and_drop(element,drag,drop) # drag and drop
 action.context_click() # клик правой кнопкой мыши
 action.release()# отпустить кнопку мыши
 action.perform() # подтверждение
